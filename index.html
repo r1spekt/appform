@@ -60,7 +60,8 @@
 </body>
 
 <script>
-   document.getElementById('div-get').innerHTML=document.location.href;
+   url=new URL(document.location.href)
+   document.getElementById('div-get').innerHTML=url.searchParams.get('a');
 
    //Проверка на пустое поле ввода
    function isEmpty(str){
