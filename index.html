@@ -55,9 +55,13 @@
       <input type="text" id="name">
       <button id="btn_snd_name" class="button">Отправить onclick=</button>
    </form>
+   <div id="div-get">
+   </div>
 </body>
 
 <script>
+   document.getElementById('div-get').innerHTML=document.location.href;
+
    //Проверка на пустое поле ввода
    function isEmpty(str){
       return (str == null) || (str.length == 0);
