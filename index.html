@@ -42,8 +42,6 @@
 </head>
 
 <body>
-   <div id="usercard"> <!--Карта профиля, человека, который к нам обратился-->
-   </div>
    <p>Just text</p> <!--Просто текст для проверки-->
    <a class="link" href="https://mihailgok.ru">Link</a> <!--Просто ссылка для проверки-->
    <p class="hint">Some little hint</p> <!--Просто текст-подсказка для проверки-->
@@ -58,37 +56,29 @@
    </div>
    <div id="div-form">
    </div>
+   <div id="div-brand_name">
+   </div>
 </body>
 
 <script>
+   //функция декодирования base64 в str с ru
    function b64_to_utf8(str) {
 	return decodeURIComponent(escape(window.atob(str)));
 }
 
-   url=new URL(document.location.href)
-   document.getElementById('div-get').innerHTML=url.searchParams.get('data');
-   //1. Заменить - на +
-   //2. Сделать base64 decode
-   //3. Сделать json decode
-   //4. Вывести в лейбл
-   data_base64=url.searchParams.get('data');
-   data_base64=data_base64.replace(/-/g, "+");
-   data=b64_to_utf8(data_base64)
-   document.getElementById('div-form').innerHTML=data;
-   data=JSON.parse(data);
-   console.log(data);
+   url=new URL(document.location.href) //Получаем URL
+   document.getElementById('div-get').innerHTML=url.searchParams.get('data'); // Выводим параметр data в лейбл
+   data_base64=url.searchParams.get('data');// Выводим параметр data в переменную
+   data_base64=data_base64.replace(/-/g, "+");// Заменяем все - на + (т.к. браузер сам интерпритирует +)
+   data=b64_to_utf8(data_base64) // Декодируем
+   document.getElementById('div-form').innerHTML=data; //Выводим в лейбл
+   data=JSON.parse(data); // Парсим str в JSON
+   console.log(data); // Выводим в консоль браузера
+
+   // надо пробежаться по объекту data и вывести данные в формы
+   document.getElementById('div-brand_name').innerHTML=data[0];
 
 
-
-   //Проверка на пустое поле ввода
-   function isEmpty(str){
-      return (str == null) || (str.length == 0);
-   }
-   //Считываем значение из поля ввода
-   function readfield(button_id) {
-      var str = document.getElementById(button_id).value;
-      return str
-   }
    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
    tg.expand(); //расширяем на все окно
    tg.MainButton.text = "Changed Text"; //изменяем текст кнопки
