@@ -69,8 +69,8 @@
    //4. Вывести в лейбл
    data_base64=url.searchParams.get('data');
    data_base64=data_base64.replace("-", "+");
+   document.getElementById('div-form').innerHTML=data_base64
    data_base64_decode = atob(data_base64);
-   document.getElementById('div-form').innerHTML=data_base64_decode;
 
 
    //Проверка на пустое поле ввода
