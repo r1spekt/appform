@@ -6,7 +6,6 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Test Telegram WebApps API</title>
    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!--Подключаем скрипт от телеграм-->
-
    <style>
       body{
          color: var(--tg-theme-text-color);
@@ -57,11 +56,22 @@
    </form>
    <div id="div-get">
    </div>
+   <div id="div-form">
+   </div>
 </body>
 
 <script>
    url=new URL(document.location.href)
    document.getElementById('div-get').innerHTML=url.searchParams.get('data');
+   //1. Заменить - на +
+   //2. Сделать base64 decode
+   //3. Сделать json decode
+   //4. Вывести в лейбл
+   data_base64=url.searchParams.get('data');
+   data_base64=data_base64.replace("-", "+");
+   data_base64_decode = atob(data_base64);
+   document.getElementById('div-form').innerHTML=data_base64_decode;
+
 
    //Проверка на пустое поле ввода
    function isEmpty(str){
