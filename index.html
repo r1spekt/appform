@@ -51,20 +51,44 @@
       <label for = "name">Введите имя</label>
       <input type="text" id="name">
       <button id="btn_snd_name" class="button">Отправить onclick=</button>
+   <!--Выводим наш гет в base64-->
    </form>
-   <div id="div-get">
-   </div>
+      <div id="div-get">
+      </div>
+   <!--Выводим декодированный гет-->
    <form>
       <div id="div-form">
       </div>
    </form>
+   <!--Выводим имя бренда-->
    <form>
       <label for = "div-brand_name">Ваш бренд</label>
       <div id="div-brand_name">
       </div>
+   </form>
+   <!--Выводим тип отчёта-->
+   <form>
       <label for = "div-order_type_1">Ваш тип отчёта</label>
       <div id="div-order_type_1">
       </div>
+   </form>
+   <!--Выводим поля из отчёта тип = 1-->
+   <!--http://shurick31.narod.ru/dynamic_forms.html-->
+   <form name="links" method="post">
+      <table id="tbl">
+         <tr>
+            <td><input type="text" name="name" width="60"></td>
+            <td><input type="submit"></td>
+         </tr>
+         <tr>
+            <td><input type="text" name="URL" width="60"></td>
+            <td><input type="submit"></td>
+         </tr>
+         <tr>
+            <td><input type="text" name="category" width="30"></td>
+            <td><input type="submit"></td>
+         </tr>
+      </table>
    </form>
 </body>
 
