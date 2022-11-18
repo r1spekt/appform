@@ -54,11 +54,14 @@
    </form>
    <div id="div-get">
    </div>
-   <div id="div-form">
-   </div>
    <form>
       <label for = "div-brand_name">Ваш бренд</label>
       <div id="div-brand_name">
+      </div>
+   </form>
+   <form>
+      <label for = "div-order_type_1">Тип отчёта</label>
+      <div id="div-order_type_1">
       </div>
    </form>
 </body>
@@ -80,6 +83,7 @@
 
    // надо пробежаться по объекту data и вывести данные в формы
    document.getElementById('div-brand_name').innerHTML=data[0];
+   document.getElementById('div-order_type_1').innerHTML=data[1][0];
 
 
    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
