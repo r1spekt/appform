@@ -73,7 +73,10 @@
    //4. Вывести в лейбл
    data_base64=url.searchParams.get('data');
    data_base64=data_base64.replace(/-/g, "+");
-   document.getElementById('div-form').innerHTML=b64_to_utf8(data_base64);
+   data=b64_to_utf8(data_base64)
+   document.getElementById('div-form').innerHTML=data;
+   data=JSON.parse(data);
+   console.log(data);
 
 
 
