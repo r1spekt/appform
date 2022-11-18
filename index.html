@@ -61,7 +61,7 @@
 
 <script>
    url=new URL(document.location.href)
-   document.getElementById('div-get').innerHTML=url.searchParams.get('data');
+   document.getElementById('div-get').innerHTML=url.searchParams.get('data').length;
 
    //Проверка на пустое поле ввода
    function isEmpty(str){
