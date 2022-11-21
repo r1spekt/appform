@@ -42,19 +42,11 @@
 </head>
 
 <body>
-   <p>Just text</p> <!--Просто текст для проверки-->
-   <a class="link" href="https://mihailgok.ru">Link</a> <!--Просто ссылка для проверки-->
-   <p class="hint">Some little hint</p> <!--Просто текст-подсказка для проверки-->
-   <button id="btn" class="button">Show/Hide Main Button</button> <!--Кнопка, чтобы скрыть / показать основную кнопку-->
-   <button id="btnED" class="button">Enable/Disable Main Button</button> <!--Кнопка, чтобы сделать кнопку активной/неактивной-->
-   <form>
-      <label for = "name">Введите имя</label>
-      <input type="text" id="name">
-      <button id="btn_snd_name" class="button">Отправить onclick=</button>
+   <!--<button id="btn" class="button">Show/Hide Main Button</button> <!--Кнопка, чтобы скрыть / показать основную кнопку-->
+   <!--<button id="btnED" class="button">Enable/Disable Main Button</button> <!--Кнопка, чтобы сделать кнопку активной/неактивной-->
    <!--Выводим наш гет в base64-->
-   </form>
-      <div id="div-get">
-      </div>
+   <div id="div-get">
+   </div>
    <!--Выводим декодированный гет-->
    <form>
       <div id="div-form">
@@ -62,32 +54,20 @@
    </form>
    <!--Выводим имя бренда-->
    <form>
-      <label for = "div-brand_name">Ваш бренд</label>
-      <div id="div-brand_name">
-      </div>
+      <label for = "div-brand_name">Ваш бренд:</label>
+      <span id="div-brand_name">
+      </span>
    </form>
    <!--Выводим тип отчёта-->
    <form>
-      <label for = "div-order_type_1">Ваш тип отчёта</label>
-      <div id="div-order_type_1">
-      </div>
+      <label for = "div-order_type_1">Ваш тип отчёта:</label>
+      <span id="div-order_type_1">
+      </span>
    </form>
    <!--Выводим поля из отчёта тип = 1-->
    <!--http://shurick31.narod.ru/dynamic_forms.html-->
    <form name="links" method="post">
-      <table id="tbl">
-         <tr>
-            <td><input type="text" name="name" width="60"></td>
-            <td><input type="submit"></td>
-         </tr>
-         <tr>
-            <td><input type="text" name="URL" width="60"></td>
-            <td><input type="submit"></td>
-         </tr>
-         <tr>
-            <td><input type="text" name="category" width="30"></td>
-            <td><input type="submit"></td>
-         </tr>
+      <table id="tbl1">
       </table>
    </form>
 </body>
@@ -99,18 +79,33 @@
 }
 
    url=new URL(document.location.href) //Получаем URL
-   document.getElementById('div-get').innerHTML=url.searchParams.get('data'); // Выводим параметр data в лейбл
+   //document.getElementById('div-get').innerHTML=url.searchParams.get('data'); // Выводим параметр data в лейбл
    data_base64=url.searchParams.get('data');// Выводим параметр data в переменную
    data_base64=data_base64.replace(/-/g, "+");// Заменяем все - на + (т.к. браузер сам интерпритирует +)
    data=b64_to_utf8(data_base64) // Декодируем
-   document.getElementById('div-form').innerHTML=data; //Выводим в лейбл
+   //document.getElementById('div-form').innerHTML=data; //Выводим в лейбл
    data=JSON.parse(data); // Парсим str в JSON
    console.log(data); // Выводим в консоль браузера
 
    // надо пробежаться по объекту data и вывести данные в формы
-   document.getElementById('div-brand_name').innerHTML=data[0];
-   document.getElementById('div-order_type_1').innerHTML=data[1][0];
+   document.getElementById('div-brand_name').innerHTML=data[0].split(';')[1].split(':')[1];
+   document.getElementById('div-order_type_1').innerHTML=data[1][0].split(';')[1].split(':')[1];
 
+   function _build_form1(data) {
+      var code ='';
+      for (key in data[1][1]) {
+         console.log("Ключ = " + key);
+         console.log("Значение = " + data[1][1][key]);
+         //var tbodyRef = document.getElementById('tbl1');
+         //var newRow = tbodyRef.insertRow();
+         //newRow.innerHTML = data[1][1][key];
+         var a= data[1][1][key].split(';');
+         code = code+' <TR><TD><B>'+a[1].split(':')[1]+':<B></TD><TD><INPUT NAME="'+a[0].split(':')[1]+'" SIZE=20 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
+
+      }
+      document.getElementById('tbl1').innerHTML=code
+   }
+   _build_form1(data)
 
    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
    tg.expand(); //расширяем на все окно
