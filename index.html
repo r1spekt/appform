@@ -75,8 +75,8 @@
 <script>
    //функция декодирования base64 в str с ru
    function b64_to_utf8(str) {
-	return decodeURIComponent(escape(window.atob(str)));
-}
+      return decodeURIComponent(escape(window.atob(str)));
+   }
 
    url=new URL(document.location.href) //Получаем URL
    //document.getElementById('div-get').innerHTML=url.searchParams.get('data'); // Выводим параметр data в лейбл
@@ -87,25 +87,24 @@
    data=JSON.parse(data); // Парсим str в JSON
    console.log(data); // Выводим в консоль браузера
 
-   // надо пробежаться по объекту data и вывести данные в формы
-   document.getElementById('div-brand_name').innerHTML=data[0].split(';')[1].split(':')[1];
-   document.getElementById('div-order_type_1').innerHTML=data[1][0].split(';')[1].split(':')[1];
+   document.getElementById('div-brand_name').innerHTML=data[0].split(';')[1].split(':')[1]; //Выводим название бренда
+   document.getElementById('div-order_type_1').innerHTML=data[1][0].split(';')[1].split(':')[1]; //выводим название отчёта type 1
 
+   //Функция для формирования формы для сотрудника
    function _build_form1(data) {
       var code ='';
       for (key in data[1][1]) {
-         console.log("Ключ = " + key);
-         console.log("Значение = " + data[1][1][key]);
+         //console.log("Ключ = " + key);
+         //console.log("Значение = " + data[1][1][key]);
          //var tbodyRef = document.getElementById('tbl1');
          //var newRow = tbodyRef.insertRow();
          //newRow.innerHTML = data[1][1][key];
          var a= data[1][1][key].split(';');
          code = code+' <TR><TD><B>'+a[1].split(':')[1]+':<B></TD><TD><INPUT NAME="'+a[0].split(':')[1]+'" SIZE=20 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
-
       }
       document.getElementById('tbl1').innerHTML=code
    }
-   _build_form1(data)
+   _build_form1(data)// формируем форму
 
    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
    tg.expand(); //расширяем на все окно
@@ -116,51 +115,5 @@
    tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры
    let btn = document.getElementById("btn"); //получаем кнопку скрыть/показать
 
-   //кнопки
-   btn.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
-      if (tg.MainButton.isVisible){ //если кнопка показана
-         tg.MainButton.hide() //скрываем кнопку
-      }
-      else{ //иначе
-         tg.MainButton.show() //показываем
-      }
-   });
-
-   let btnED = document.getElementById("btnED"); //получаем кнопку активировать/деактивировать
-   btnED.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
-      if (tg.MainButton.isActive){ //если кнопка показана
-         tg.MainButton.setParams({"color": "#E0FFFF"}); //меняем цвет
-         tg.MainButton.disable() //скрываем кнопку
-      }
-      else{ //иначе
-         tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
-         tg.MainButton.enable() //показываем
-      }
-   });
-
-   Telegram.WebApp.onEvent('mainButtonClicked', function(){
-      tg.sendData("some string that we need to send");
-      //при клике на основную кнопку отправляем данные в строковом виде
-   });
-
-
-   let usercard = document.getElementById("usercard"); //получаем блок usercard
-
-   let profName = document.createElement('p'); //создаем параграф
-   profName.innerText = `${tg.initDataUnsafe.user.first_name}
-   ${tg.initDataUnsafe.user.last_name}
-   ${tg.initDataUnsafe.user.username} (${tg.initDataUnsafe.user.language_code})`;
-   //выдем имя, "фамилию", через тире username и код языка
-   usercard.appendChild(profName); //добавляем
-
-   let userid = document.createElement('p'); //создаем еще параграф
-   userid.innerText = `${tg.initDataUnsafe.user.id}`; //показываем user_id
-   usercard.appendChild(userid); //добавляем
-
-
-   //работает только в attachment menu
-   // let pic = document.createElement('img'); //создаем img
-   // pic.src = tg.initDataUnsafe.user.photo_url; //задаём src
-   // usercard.appendChild(pic); //добавляем элемент в карточку
 </script>
 </html>
