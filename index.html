@@ -170,12 +170,9 @@
    */
    //Функция отправки данных из формы в бота
    function send_data(){
-      data = 'Hello'
-      return data
+      data = 'Hello';
+      return data;
    }
-   Telegram.WebApp.onEvent('mainButtonClicked', function(){
-      tg.sendData(send_data());
-      //при клике на основную кнопку отправляем данные в строковом виде
-   });
+   Telegram.WebApp.onEvent('mainButtonClicked', send_data);
 </script>
 </html>
