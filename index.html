@@ -42,9 +42,7 @@
 </head>
 
 <body>
-   <!--<button id="btn" class="button">Show/Hide Main Button</button> <!--Кнопка, чтобы скрыть / показать основную кнопку-->
-   <!--<button id="btnED" class="button">Enable/Disable Main Button</button> <!--Кнопка, чтобы сделать кнопку активной/неактивной-->
-   <!--Выводим наш гет в base64-->
+    <!--Выводим наш гет в base64-->
    <div id="div-get">
    </div>
    <!--Выводим декодированный гет-->
@@ -65,7 +63,6 @@
       </span>
    </form>
    <!--Выводим поля из отчёта тип = 1-->
-   <!--http://shurick31.narod.ru/dynamic_forms.html-->
    <form name="links" method="post">
       <table id="tbl1">
       </table>
@@ -73,28 +70,30 @@
 </body>
 
 <script>
-   let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
+   let tg = window.Telegram.WebApp;
    //Функция отображения телеграм кнопки
    function tgMainB_visible(){
       tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
-      tg.MainButton.show() //показываем
+      tg.MainButton.show(); //показываем
    }
    //Функция скрытия телеграм кнопки
    function tgMainB_invisible(){
       if (tg.MainButton.isVisible){
          tg.MainButton.setParams({"color": "#E0FFFF"}); //меняем цвет
-         tg.MainButton.hide() //скрываем кнопку
+         tg.MainButton.hide(); //скрываем кнопку
+      }
    }
    //функция декодирования base64 в str с ru
    function b64_to_utf8(str) {
       return decodeURIComponent(escape(window.atob(str)));
    }
 
-   url=new URL(document.location.href) //Получаем URL
+   url=new URL(document.location.href); //Получаем URL
+   console.log(url)
    //document.getElementById('div-get').innerHTML=url.searchParams.get('data'); // Выводим параметр data в лейбл
    data_base64=url.searchParams.get('data');// Выводим параметр data в переменную
    data_base64=data_base64.replace(/-/g, "+");// Заменяем все - на + (т.к. браузер сам интерпритирует +)
-   data=b64_to_utf8(data_base64) // Декодируем
+   data=b64_to_utf8(data_base64); // Декодируем
    //document.getElementById('div-form').innerHTML=data; //Выводим в лейбл
    data=JSON.parse(data); // Парсим str в JSON
    console.log(data); // Выводим в консоль браузера
@@ -106,14 +105,12 @@
    function _build_form1(data) {
       var code ='';
       for (key in data[1][1]) {
-         //console.log("Ключ = " + key);
-         //console.log("Значение = " + data[1][1][key]);
          var a= data[1][1][key].split(';');
          code = code+' <TR><TD><B>'+a[1].split(':')[1]+':<B></TD><TD><INPUT NAME="'+a[0].split(':')[1]+'" ID="'+a[1].split(':')[1]+'" SIZE=20 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
       }
       document.getElementById('tbl1').innerHTML=code
    }
-   _build_form1(data)// Формируем форму
+   _build_form1(data); // Формируем форму
 
     //Функция проверки значений в полях
     function myFunction() {
@@ -144,10 +141,10 @@
          commonQUANT.style.color="red";
       };
       if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern)) {
-         tgMainB_visible() //показываем кнопку
+         tgMainB_visible(); //показываем кнопку
       }
       else {
-         tgMainB_invisible() //скрываем кнопку
+         tgMainB_invisible(); //скрываем кнопку
       };
     }
 
@@ -161,19 +158,18 @@
 
    //let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
    tg.expand(); //расширяем на все окно
+   /*
    tg.MainButton.text = "Changed Text"; //изменяем текст кнопки
    tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
    tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
    tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
    tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры
    tg.MainButton.hide() //скрываем кнопку
+   */
 
-      Telegram.WebApp.onEvent('mainButtonClicked', function(){
-
-         tg.sendData('some string that we need to send');
-         //при клике на основную кнопку отправляем данные в строковом виде
-      });
-
-
+   Telegram.WebApp.onEvent('mainButtonClicked', function(){
+      tg.sendData('some string that we need to send');
+      //при клике на основную кнопку отправляем данные в строковом виде
+   });
 </script>
 </html>
