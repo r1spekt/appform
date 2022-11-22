@@ -73,14 +73,16 @@
 </body>
 
 <script>
-   //let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
+   let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
    //Функция отображения телеграм кнопки
    function tgMainB_visible(){
-      tg.MainButton.show()
+      tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
+      tg.MainButton.enable() //показываем
    }
-   //Функция отображения телеграм кнопки
+   //Функция скрытия телеграм кнопки
    function tgMainB_invisible(){
-      tg.MainButton.hide()
+      tg.MainButton.setParams({"color": "#E0FFFF"}); //меняем цвет
+      tg.MainButton.disable() //скрываем кнопку
    }
    //функция декодирования base64 в str с ru
    function b64_to_utf8(str) {
@@ -156,7 +158,7 @@
    commonCHECK.addEventListener('blur', myFunction); //Добавляем функцию на событие
    commonQUANT.addEventListener('blur', myFunction); //Добавляем функцию на событие
 
-   let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
+   //let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
    tg.expand(); //расширяем на все окно
    tg.MainButton.text = "Changed Text"; //изменяем текст кнопки
    tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
