@@ -142,9 +142,11 @@
       };
       if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern)) {
          tgMainB_visible(); //показываем кнопку
+         console.log("Обязательные поля заполнены корректно");
       }
       else {
          tgMainB_invisible(); //скрываем кнопку
+         console.log("Обязательные поля заполнены не корректно");
       };
     }
 
@@ -158,17 +160,21 @@
 
    //let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
    tg.expand(); //расширяем на все окно
+   tg.MainButton.text = "Отправить"; //изменяем текст кнопки
    /*
-   tg.MainButton.text = "Changed Text"; //изменяем текст кнопки
    tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
    tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
    tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
    tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры
    tg.MainButton.hide() //скрываем кнопку
    */
-
+   //Функция отправки данных из формы в бота
+   function send_data(){
+      data = 'Hello'
+      return data
+   }
    Telegram.WebApp.onEvent('mainButtonClicked', function(){
-      tg.sendData('some string that we need to send');
+      tg.sendData(send_data());
       //при клике на основную кнопку отправляем данные в строковом виде
    });
 </script>
