@@ -96,24 +96,54 @@
       for (key in data[1][1]) {
          //console.log("Ключ = " + key);
          //console.log("Значение = " + data[1][1][key]);
-         //var tbodyRef = document.getElementById('tbl1');
-         //var newRow = tbodyRef.insertRow();
-         //newRow.innerHTML = data[1][1][key];
          var a= data[1][1][key].split(';');
-         code = code+' <TR><TD><B>'+a[1].split(':')[1]+':<B></TD><TD><INPUT NAME="'+a[0].split(':')[1]+'" SIZE=20 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
+         code = code+' <TR><TD><B>'+a[1].split(':')[1]+':<B></TD><TD><INPUT NAME="'+a[0].split(':')[1]+'" ID="'+a[1].split(':')[1]+'" SIZE=20 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
       }
       document.getElementById('tbl1').innerHTML=code
    }
-   _build_form1(data)// формируем форму
+   _build_form1(data)// Формируем форму
+
+    //Функция проверки значений в полях
+    function myFunction() {
+      //alert("Hello");
+      console.log(Number.isInteger());
+    }
+
+   var commonSUM = document.getElementById('Общая сумма');
+   var commonCHECK = document.getElementById('Общее кол-во чеков');
+   //console.log(commonSUM);
+   //console.log(commonCHECK);
+   commonSUM.addEventListener('blur', myFunction());
+   commonCHECK.addEventListener('blur', myFunction());
+
+
+   //Функция проверки значений в полях
+
+   //запуск функции повесить на событие
+
+
 
    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
+   if ('первые два отчёта заполнены'){
+         tg.MainButton.show() //показываем кнопку
+      }
+      else{ //иначе
+         tg.MainButton.hide() //скрываем
+      }
    tg.expand(); //расширяем на все окно
    tg.MainButton.text = "Changed Text"; //изменяем текст кнопки
    tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
    tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
    tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
    tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры
-   let btn = document.getElementById("btn"); //получаем кнопку скрыть/показать
+   tg.MainButton.hide() //скрываем кнопку
+
+      Telegram.WebApp.onEvent('mainButtonClicked', function(){
+
+         tg.sendData('some string that we need to send');
+         //при клике на основную кнопку отправляем данные в строковом виде
+      });
+
 
 </script>
 </html>
