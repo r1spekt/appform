@@ -77,12 +77,13 @@
    //Функция отображения телеграм кнопки
    function tgMainB_visible(){
       tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
-      tg.MainButton.enable() //показываем
+      tg.MainButton.show() //показываем
    }
    //Функция скрытия телеграм кнопки
    function tgMainB_invisible(){
-      tg.MainButton.setParams({"color": "#E0FFFF"}); //меняем цвет
-      tg.MainButton.disable() //скрываем кнопку
+      if (tg.MainButton.isVisible){
+         tg.MainButton.setParams({"color": "#E0FFFF"}); //меняем цвет
+         tg.MainButton.hide() //скрываем кнопку
    }
    //функция декодирования base64 в str с ru
    function b64_to_utf8(str) {
