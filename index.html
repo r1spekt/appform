@@ -128,7 +128,24 @@
 
    tg.expand(); //расширяем на все окно
    tg.MainButton.text = "Отправить"; //изменяем текст кнопки
-
+   /*
+   data1={};
+   data1.day='day'
+   data1.month='month'
+   data1.reportType=1
+   data1.indicators=[];
+   var table= document.getElementById('tbl1');
+   for (var i = 0; i < table.rows.length; i++) {
+      tb_cell_data=table.rows[i].cells[1].childNodes[0];
+      console.log(tb_cell_data)
+      console.log(tb_cell_data.getAttribute('name'));
+      console.log(tb_cell_data.getAttribute('this.value'));
+      ord_indicators={};
+      ord_indicators.guid=tb_cell_data.getAttribute('name');
+      ord_indicators.value=tb_cell_data.getAttribute('this.value');
+      data1.indicators.push(ord_indicators);
+   }
+   */
    //Функция отправки данных из формы в бота
    function send_data(){
       data={};
@@ -139,11 +156,11 @@
       var table= document.getElementById('tbl1');
       for (var i = 0; i < table.rows.length; i++) {
          tb_cell_data=table.rows[i].cells[1].childNodes[0];
-         console.log(tb_cell_data.getAttribute('name'));
-         console.log(tb_cell_data.getAttribute('value'));
+         //console.log(tb_cell_data.getAttribute('name'));
+         //console.log(tb_cell_data.getAttribute('this.value'));
          ord_indicators={};
          ord_indicators.guid=tb_cell_data.getAttribute('name');
-         ord_indicators.value=tb_cell_data.getAttribute('value');
+         ord_indicators.value=tb_cell_data.getAttribute('this.value');
          data.indicators.push(ord_indicators);
       }
       data=JSON.stringify(data)
