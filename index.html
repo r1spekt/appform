@@ -173,9 +173,11 @@
       data = 'Hello';
       return data;
    }
+   var data='Hello' //сюда сложим данные для отправки
+
    Telegram.WebApp.onEvent('mainButtonClicked', function(){
       //tg.sendData(send_data());
-      tg.sendData("Hello");
+      tg.sendData(data);
       //при клике на основную кнопку отправляем данные в строковом виде
    });
 </script>
