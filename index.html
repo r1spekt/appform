@@ -6,39 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Test Telegram WebApps API</title>
    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!--Подключаем скрипт от телеграм-->
-   <style>
-      body{
-         color: var(--tg-theme-text-color);
-         background: var(--tg-theme-bg-color);
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         font-size: 18px;
-      }
-
-      .hint{
-         color: var(--tg-theme-hint-color);
-      }
-
-      .link{
-         color: var(--tg-theme-link-color);
-      }
-
-      .button{
-         background: var(--tg-theme-button-color);
-         color: var(--tg-theme-button-text-color);
-         border: none;
-         font-size: 18px;
-      }
-
-      .button:not(:last-child){
-         margin-bottom: 20px
-      }
-
-      #usercard{
-         text-align: center;
-      }
-   </style>
+   <link href="style.css" rel="stylesheet"></link>
 </head>
 
 <body>
@@ -158,27 +126,35 @@
    commonCHECK.addEventListener('blur', myFunction); //Добавляем функцию на событие
    commonQUANT.addEventListener('blur', myFunction); //Добавляем функцию на событие
 
-   //let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
    tg.expand(); //расширяем на все окно
    tg.MainButton.text = "Отправить"; //изменяем текст кнопки
-   /*
-   tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
-   tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
-   tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
-   tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры
-   tg.MainButton.hide() //скрываем кнопку
-   */
+
    //Функция отправки данных из формы в бота
    function send_data(){
-      data = 'Hello';
+      data={};
+      data.day='day'
+      data.month='month'
+      data.reportType=1
+      data.indicators=[];
+      var table= document.getElementById('tbl1');
+      for (var i = 0; i < table.rows.length; i++) {
+         tb_cell_data=table.rows[i].cells[1].childNodes[0];
+         console.log(tb_cell_data.getAttribute('name'));
+         console.log(tb_cell_data.getAttribute('value'));
+         ord_indicators={};
+         ord_indicators.guid=tb_cell_data.getAttribute('name');
+         ord_indicators.value=tb_cell_data.getAttribute('value');
+         data.indicators.push(ord_indicators);
+      }
+      data=JSON.stringify(data)
       return data;
    }
-   var data='Hello' //сюда сложим данные для отправки
 
+
+   //при клике на основную кнопку отправляем данные в строковом виде
    Telegram.WebApp.onEvent('mainButtonClicked', function(){
       //tg.sendData(send_data());
       tg.sendData(data);
-      //при клике на основную кнопку отправляем данные в строковом виде
    });
 </script>
 </html>
