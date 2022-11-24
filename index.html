@@ -66,15 +66,16 @@
    data=JSON.parse(data); // Парсим str в JSON
    console.log(data); // Выводим в консоль браузера
 
-   document.getElementById('div-brand_name').innerHTML=data[0].split(';')[1].split(':')[1]; //Выводим название бренда
-   document.getElementById('div-order_type_1').innerHTML=data[1][0].split(';')[1].split(':')[1]; //выводим название отчёта type 1
+   //document.getElementById('div-brand_name').innerHTML=data[0].split(';')[1].split(':')[1]; //Выводим название бренда
+   document.getElementById('div-brand_name').innerHTML=data.brands[0].name; //Выводим название бренда
+   document.getElementById('div-order_type_1').innerHTML=data.brands[0].reports[0].name; //выводим название отчёта type 1
 
    //Функция для формирования формы для сотрудника
    function _build_form1(data) {
       var code ='';
-      for (key in data[1][1]) {
-         var a= data[1][1][key].split(';');
-         code = code+' <TR><TD><B>'+a[1].split(':')[1]+':<B></TD><TD><INPUT NAME="'+a[0].split(':')[1]+'" ID="'+a[1].split(':')[1]+'" SIZE=20 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
+      for (key in data.brands[0].reports[0].indicators) {
+         var a= data.brands[0].reports[0].indicators[key];
+         code = code+' <TR><TD><B>'+a.name+':<B></TD><TD><INPUT NAME="'+a.guid+'" ID="'+a.name+'" SIZE=20 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
       }
       document.getElementById('tbl1').innerHTML=code
    }
