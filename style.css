@@ -32,3 +32,10 @@ body{
 #usercard{
     text-align: center;
 }
+td{
+    font-size: 14px;
+}
+select{
+    font-size: 14px;
+}
+
