@@ -41,9 +41,8 @@
       </span>
    </form>
     -->
-   <form>
-      <p>Выберите дату: <input type="date" name="calendar">
-      <input type="submit" value="Отправить"></p>
+   <form name="calendar">
+      <p>Выберите дату: <input type="date" id = "ddmmgggg" name="calendar">
     </form>
    <!--Выводим поля из отчёта тип = 1-->
    <form name="links" method="post">
@@ -54,6 +53,8 @@
 
 <script>
    let tg = window.Telegram.WebApp;
+   a=document.getElementById('calendar');
+   console.log(a)
    //Функция отображения телеграм кнопки
    function tgMainB_visible(){
       tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
@@ -83,13 +84,9 @@
 
    document.getElementById('div-brand_name').innerHTML=data.brands[0].name; //Выводим название бренда
    document.getElementById('div-order_type_1').innerHTML=data.brands[0].reports[0].name; //выводим название отчёта type 1
-   //
-
-   //Функция для формирования списка дат
 
    //Функция для формирования формы для сотрудника
    function _build_form1(data) {
-   //подписать единицы измерения
       var code ='';
       for (key in data.brands[0].reports[0].indicators) {
          var a= data.brands[0].reports[0].indicators[key];
@@ -97,8 +94,8 @@
       }
       document.getElementById('tbl1').innerHTML=code
    }
-
-   _build_form1(data); // Формируем форму
+   // Формируем форму для заполнения
+   _build_form1(data);
 
     //Функция проверки значений в полях
     function myFunction() {
@@ -129,9 +126,10 @@
       else {
          commonQUANT.style.color="red";
       };
-      if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern)) {
+      if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern) && document.getElementById('ddmmgggg').value != '') {
          tgMainB_visible(); //показываем кнопку
          console.log("Обязательные поля заполнены корректно");
+         console.log(document.getElementById('ddmmgggg').value)
       }
       else {
          tgMainB_invisible(); //скрываем кнопку
@@ -158,9 +156,6 @@
    var table= document.getElementById('tbl1');
    for (var i = 0; i < table.rows.length; i++) {
       tb_cell_data=table.rows[i].cells[1].childNodes[0];
-      console.log(tb_cell_data)
-      console.log(tb_cell_data.getAttribute('name'));
-      console.log(tb_cell_data.getAttribute('value'));
       ord_indicators={};
       ord_indicators.guid=tb_cell_data.getAttribute('name');
       ord_indicators.value=tb_cell_data.getAttribute('value');
@@ -169,21 +164,25 @@
    */
    //Функция отправки данных из формы в бота
    function send_data(){
-      data={};
-      data.day='day'
-      data.month='month'
-      data.reportType=1
-      data.indicators=[];
-      var table= document.getElementById('tbl1');
-      for (var i = 0; i < table.rows.length; i++) {
-         tb_cell_data=table.rows[i].cells[1].childNodes[0];
-         //console.log(tb_cell_data.getAttribute('name'));
-         //console.log(tb_cell_data.getAttribute('value'));
-         ord_indicators={};
-         if (tb_cell_data.value != '') {
-            ord_indicators.guid=tb_cell_data.getAttribute('name');
-            ord_indicators.value=tb_cell_data.value;
-            data.indicators.push(ord_indicators);
+      if (document.getElementById('ddmmgggg').value != ''){
+         date=document.getElementById('ddmmgggg').value.split('-');
+         data={};
+         data.day=date[2]
+         data.month=date[1]
+         data.year=date[0]
+         data.reportType=1
+         data.indicators=[];
+         var table= document.getElementById('tbl1');
+         for (var i = 0; i < table.rows.length; i++) {
+            tb_cell_data=table.rows[i].cells[1].childNodes[0];
+            //console.log(tb_cell_data.getAttribute('name'));
+            //console.log(tb_cell_data.getAttribute('value'));
+            ord_indicators={};
+            if (tb_cell_data.value != '') {
+               ord_indicators.guid=tb_cell_data.getAttribute('name');
+               ord_indicators.value=tb_cell_data.value;
+               data.indicators.push(ord_indicators);
+            }
          }
       }
       data=JSON.stringify(data);
