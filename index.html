@@ -86,11 +86,10 @@
 
     //Функция проверки значений в полях
     function myFunction() {
-      // Количество чеком всегда меньше продукции, т.к. IPT(продукция/на чеки) всегда >1
-      commonSUM.value=commonSUM.value.trim()
-      commonCHECK.value=commonCHECK.value.trim()
-      commonQUANT.value=commonQUANT.value.trim()
-      pattern=/^\d+$/; // Инпут = integer
+      commonSUM.value=commonSUM.value.trim();
+      commonCHECK.value=commonCHECK.value.trim();
+      commonQUANT.value=commonQUANT.value.trim();
+      pattern=/^\d+$/;
       if (commonSUM.value.match(pattern)) {
          console.log(commonSUM.value);
          commonSUM.style.color='green';
@@ -133,21 +132,7 @@
 
    tg.expand(); //расширяем на все окно
    tg.MainButton.text = "Отправить"; //изменяем текст кнопки
-   /*
-   data1={};
-   data1.day='day'
-   data1.month='month'
-   data1.reportType=1
-   data1.indicators=[];
-   var table= document.getElementById('tbl1');
-   for (var i = 0; i < table.rows.length; i++) {
-      tb_cell_data=table.rows[i].cells[1].childNodes[0];
-      ord_indicators={};
-      ord_indicators.guid=tb_cell_data.getAttribute('name');
-      ord_indicators.value=tb_cell_data.getAttribute('value');
-      data1.indicators.push(ord_indicators);
-   }
-   */
+
    //Функция отправки данных из формы в бота
    function send_data(){
       if (document.getElementById('ddmmgggg').value != ''){
