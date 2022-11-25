@@ -32,11 +32,10 @@
       <span id="div-order_type_1">
       </span>
    </form>
-   <!--Выводим календарь
+   <!--Выводим календарь-->
    <form name="calendar">
       <p>Выберите дату: <input type="date" id="ddmmgggg" name="calendar">
     </form>
-   -->
    <!--Выводим поля из отчёта тип = 1-->
    <form name="links" method="post">
       <table id="tbl1">
@@ -72,6 +71,7 @@
    //document.getElementById('div-form').innerHTML=data; //Выводим в лейбл
    data=JSON.parse(data); // Парсим str в JSON
    console.log(data); // Выводим в консоль браузера
+   //console.log(data.brands[0].reports[0].type)
 
    document.getElementById('div-brand_name').innerHTML=data.brands[0].name; //Выводим название бренда
    document.getElementById('div-order_type_1').innerHTML=data.brands[0].reports[0].name; //выводим название отчёта type 1
@@ -115,11 +115,10 @@
       else {
          commonQUANT.style.color="red";
       };
-      //if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern) && document.getElementById('ddmmgggg').value != '') {
-      if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern)) {
+      if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern) && document.getElementById('ddmmgggg').value != '') {
          tgMainB_visible(); //показываем кнопку
          console.log("Обязательные поля заполнены корректно");
-         //console.log(document.getElementById('ddmmgggg').value);
+         console.log(document.getElementById('ddmmgggg').value);
       }
       else {
          tgMainB_invisible(); //скрываем кнопку
@@ -140,29 +139,27 @@
 
    //Функция отправки данных из формы в бота
    function send_data(){
-      if (document.getElementById('ddmmgggg').value != ''){
-         date=document.getElementById('ddmmgggg').value.split('-');
-         data={};
-         data.day=date[2]
-         data.month=date[1]
-         data.year=date[0]
-         data.reportType=1
-         data.indicators=[];
-         var table= document.getElementById('tbl1');
-         for (var i = 0; i < table.rows.length; i++) {
-            tb_cell_data=table.rows[i].cells[1].childNodes[0];
-            //console.log(tb_cell_data.getAttribute('name'));
-            //console.log(tb_cell_data.getAttribute('value'));
-            ord_indicators={};
-            if (tb_cell_data.value != '') {
-               ord_indicators.guid=tb_cell_data.getAttribute('name');
-               ord_indicators.value=tb_cell_data.value;
-               data.indicators.push(ord_indicators);
-            }
+      date=document.getElementById('ddmmgggg').value.split('-');
+      data_snd={};
+      data_snd.day=date[2];
+      data_snd.month=date[1];
+      data_snd.year=date[0];
+      data_snd.reportType=data.brands[0].reports[0].type;
+      data_snd.indicators=[];
+      var table= document.getElementById('tbl1');
+      for (var i = 0; i < table.rows.length; i++) {
+         tb_cell_data=table.rows[i].cells[1].childNodes[0];
+         console.log(tb_cell_data.getAttribute('name'));
+         console.log(tb_cell_data.getAttribute('value'));
+         ord_indicators={};
+         if (tb_cell_data.value != '') {
+            ord_indicators.guid=tb_cell_data.getAttribute('name');
+            ord_indicators.value=tb_cell_data.value;
+            data_snd.indicators.push(ord_indicators);
          }
       }
-      data=JSON.stringify(data);
-      return data;
+      data_tr=JSON.stringify(data_snd);
+      return data_tr;
    }
 
 
