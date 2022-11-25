@@ -88,51 +88,36 @@
    // Формируем форму для заполнения
    _build_form1(data);
 
-    //Функция проверки значений в полях
-    function myFunction() {
-      commonSUM.value=commonSUM.value.trim();
-      commonCHECK.value=commonCHECK.value.trim();
-      commonQUANT.value=commonQUANT.value.trim();
+   //Функция проверки значения = int
+   function myFunction() {
+      var table= document.getElementById('tbl1');
+      console.log(table.rows[0].cells[1].childNodes[0].value);
+      date=document.getElementById('ddmmgggg').value;
       pattern=/^\d+$/;
-      if (commonSUM.value.match(pattern)) {
-         console.log(commonSUM.value);
-         commonSUM.style.color='green';
+      if (this.value.match(pattern) || this.value==""){
+         this.style.color='green';
       }
-      else {
-         commonSUM.style.color="red";
-      };
-      if (commonCHECK.value.match(pattern)) {
-         console.log(commonCHECK.value);
-         commonCHECK.style.color='green';
+      else{
+         this.style.color="red";
       }
-      else {
-         commonCHECK.style.color="red";
-      };
-      if (commonQUANT.value.match(pattern)) {
-         console.log(commonQUANT.value);
-         commonQUANT.style.color='green';
+      if (table.rows[0].cells[1].childNodes[0].value.match(pattern) && table.rows[1].cells[1].childNodes[0].value.match(pattern) && table.rows[2].cells[1].childNodes[0].value.match(pattern) && document.getElementById('ddmmgggg').value != ''){
+         tgMainB_visible();
       }
-      else {
-         commonQUANT.style.color="red";
-      };
-      if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern) && document.getElementById('ddmmgggg').value != '') {
-         tgMainB_visible(); //показываем кнопку
-         console.log("Обязательные поля заполнены корректно");
-         console.log(document.getElementById('ddmmgggg').value);
+      else{
+         tgMainB_invisible();
       }
-      else {
-         tgMainB_invisible(); //скрываем кнопку
-         console.log("Обязательные поля заполнены не корректно");
-      };
+   }
+
+   //Функция добавления EventListner
+    function myFunction_ev_lst() {
+      var table= document.getElementById('tbl1');
+      for (var i = 0; i < table.rows.length; i++) {
+         tb_cell_data=table.rows[i].cells[1].childNodes[0];
+         tb_cell_data.addEventListener('blur', myFunction);
+      }
     }
-
-   var commonSUM = document.getElementById('Общая сумма'); //Объявляем инпут
-   var commonCHECK = document.getElementById('Общее кол-во чеков'); //Объявляем инпут
-   var commonQUANT = document.getElementById('Общее кол-во продукции'); //Объявляем инпут
-
-   commonSUM.addEventListener('blur', myFunction); //Добавляем функцию на событие
-   commonCHECK.addEventListener('blur', myFunction); //Добавляем функцию на событие
-   commonQUANT.addEventListener('blur', myFunction); //Добавляем функцию на событие
+   //Навесели Ивенты
+   myFunction_ev_lst()
 
    tg.expand(); //расширяем на все окно
    tg.MainButton.text = "Отправить"; //изменяем текст кнопки
