@@ -30,19 +30,8 @@
       <span id="div-order_type_1">
       </span>
    </form>
-    <!--Выводим выбор даты
-    <form>
-      <label for = "div-date">Укажите дату отчёта:</label>
-      <span id="div-date">
-         <select id="date">
-         </select>
-         <select id="month">
-         </select>
-      </span>
-   </form>
-    -->
    <form name="calendar">
-      <p>Выберите дату: <input type="date" id = "ddmmgggg" name="calendar">
+      <p>Выберите дату: <input type="date" id="ddmmgggg" name="calendar">
     </form>
    <!--Выводим поля из отчёта тип = 1-->
    <form name="links" method="post">
@@ -52,9 +41,7 @@
 </body>
 
 <script>
-   let tg = window.Telegram.WebApp;
-   a=document.getElementById('calendar');
-   console.log(a)
+   let tg = window.Telegram.WebApp;g
    //Функция отображения телеграм кнопки
    function tgMainB_visible(){
       tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
@@ -99,7 +86,6 @@
 
     //Функция проверки значений в полях
     function myFunction() {
-      //this.value=this.value.trim(); // Убираем пробелы
       // Количество чеком всегда меньше продукции, т.к. IPT(продукция/на чеки) всегда >1
       commonSUM.value=commonSUM.value.trim()
       commonCHECK.value=commonCHECK.value.trim()
