@@ -32,10 +32,11 @@
       <span id="div-order_type_1">
       </span>
    </form>
-   <!--Выводим календарь-->
+   <!--Выводим календарь
    <form name="calendar">
       <p>Выберите дату: <input type="date" id="ddmmgggg" name="calendar">
     </form>
+   -->
    <!--Выводим поля из отчёта тип = 1-->
    <form name="links" method="post">
       <table id="tbl1">
@@ -114,10 +115,11 @@
       else {
          commonQUANT.style.color="red";
       };
-      if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern) && document.getElementById('ddmmgggg').value != '') {
+      //if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern) && document.getElementById('ddmmgggg').value != '') {
+      if (commonSUM.value.match(pattern) && commonCHECK.value.match(pattern) && commonQUANT.value.match(pattern)) {
          tgMainB_visible(); //показываем кнопку
          console.log("Обязательные поля заполнены корректно");
-         console.log(document.getElementById('ddmmgggg').value);
+         //console.log(document.getElementById('ddmmgggg').value);
       }
       else {
          tgMainB_invisible(); //скрываем кнопку
