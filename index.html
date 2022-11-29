@@ -32,10 +32,11 @@
       <span id="div-order_type_1">
       </span>
    </form>
-   <!--Выводим календарь-->
+   <!--Выводим календарь
    <form name="calendar">
       <p>Выберите дату: <input type="date" id="ddmmgggg" name="calendar">
     </form>
+   -->
    <!--Выводим поля из отчёта тип = 1-->
    <form name="links" method="post">
       <table id="tbl1">
@@ -92,7 +93,7 @@
    function myFunction() {
       var table= document.getElementById('tbl1');
       console.log(table.rows[0].cells[1].childNodes[0].value);
-      date=document.getElementById('ddmmgggg').value;
+      //date=document.getElementById('ddmmgggg').value;
       pattern=/^\d+$/;
       if (this.value.match(pattern) || this.value==""){
          this.style.color='green';
@@ -100,7 +101,7 @@
       else{
          this.style.color="red";
       }
-      if (table.rows[0].cells[1].childNodes[0].value.match(pattern) && table.rows[1].cells[1].childNodes[0].value.match(pattern) && table.rows[2].cells[1].childNodes[0].value.match(pattern) && document.getElementById('ddmmgggg').value != ''){
+      if (table.rows[0].cells[1].childNodes[0].value.match(pattern) && table.rows[1].cells[1].childNodes[0].value.match(pattern) && table.rows[2].cells[1].childNodes[0].value.match(pattern)){
          tgMainB_visible();
       }
       else{
@@ -126,9 +127,10 @@
    function send_data(){
       date=document.getElementById('ddmmgggg').value.split('-');
       data_snd={};
-      data_snd.day=date[2];
-      data_snd.month=date[1];
-      data_snd.year=date[0];
+      //data_snd.day=date[2];
+      //data_snd.month=date[1];
+      //data_snd.year=date[0];
+      data_snd.brandName=data.brands[0].name
       data_snd.reportType=data.brands[0].reports[0].type;
       data_snd.indicators=[];
       var table= document.getElementById('tbl1');
