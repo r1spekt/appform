@@ -65,11 +65,9 @@
 
    url=new URL(document.location.href); //Получаем URL
    console.log(url)
-   //document.getElementById('div-get').innerHTML=url.searchParams.get('data'); // Выводим параметр data в лейбл
    data_base64=url.searchParams.get('data');// Выводим параметр data в переменную
    data_base64=data_base64.replace(/-/g, "+");// Заменяем все - на + (т.к. браузер сам интерпритирует +)
    data=b64_to_utf8(data_base64); // Декодируем
-   //document.getElementById('div-form').innerHTML=data; //Выводим в лейбл
    data=JSON.parse(data); // Парсим str в JSON
    console.log(data); // Выводим в консоль браузера
    //console.log(data.brands[0].reports[0].type)
@@ -82,7 +80,7 @@
       var code ='';
       for (key in data.brands[0].reports[0].indicators) {
          var a= data.brands[0].reports[0].indicators[key];
-         code = code+' <TR><TD><B>'+a.name+' ('+a.measure+')'+':<B></TD><TD><INPUT NAME="'+a.guid+'" ID="'+a.name+'" SIZE=7 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
+         code = code+' <TR><TD><B>'+a.name+' ('+a.measure+')'+':<B></TD><TD><INPUT NAME="'+a.guid+'" ID="'+a.name+'" VALUE="'+a.value+'" SIZE=7 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
       }
       document.getElementById('tbl1').innerHTML=code
    }
@@ -93,15 +91,14 @@
    function myFunction() {
       var table= document.getElementById('tbl1');
       console.log(table.rows[0].cells[1].childNodes[0].value);
-      //date=document.getElementById('ddmmgggg').value;
       pattern=/^\d+$/;
-      if (this.value.match(pattern) || this.value==""){
+      if (this.value.match(pattern) || this.value=="" || this.value==0){
          this.style.color='green';
       }
       else{
          this.style.color="red";
       }
-      if (table.rows[0].cells[1].childNodes[0].value.match(pattern) && table.rows[1].cells[1].childNodes[0].value.match(pattern) && table.rows[2].cells[1].childNodes[0].value.match(pattern)){
+      if ((table.rows[0].cells[1].childNodes[0].value.match(pattern) && table.rows[0].cells[1].childNodes[0].value>0) && (table.rows[1].cells[1].childNodes[0].value.match(pattern) && table.rows[1].cells[1].childNodes[0].value >0) && (table.rows[2].cells[1].childNodes[0].value.match(pattern) && table.rows[2].cells[1].childNodes[0].value >0)){
          tgMainB_visible();
       }
       else{
