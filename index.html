@@ -81,7 +81,7 @@
       for (key in data.brands[0].reports[0].indicators) {
          var a= data.brands[0].reports[0].indicators[key];
          if (a.value == '0' || a.value == 0){
-            a.value == "";
+            a.value = "";
          }
          code = code+' <TR><TD><B>'+a.name+' ('+a.measure+')'+':<B></TD><TD><INPUT NAME="'+a.guid+'" ID="'+a.name+'" VALUE="'+a.value+'" SIZE=7 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
       }
