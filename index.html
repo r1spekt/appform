@@ -136,7 +136,7 @@
          console.log(tb_cell_data.getAttribute('name'));
          console.log(tb_cell_data.getAttribute('value'));
          ord_indicators={};
-         if (tb_cell_data.value != '' || tb_cell_data.value != 0) {
+         if (tb_cell_data.value != '' && tb_cell_data.value != '0') {
             ord_indicators.guid=tb_cell_data.getAttribute('name');
             ord_indicators.value=tb_cell_data.value;
             data_snd.indicators.push(ord_indicators);
