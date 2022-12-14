@@ -39,13 +39,17 @@
    -->
    <!--Выводим поля из отчёта тип = 1-->
    <form name="links" method="post">
-      <table id="tbl1">
+      <table id="tbl1" style="overflow:scroll">
       </table>
    </form>
 </body>
 
 <script>
-   let tg = window.Telegram.WebApp;
+   try {
+      let tg = window.Telegram.WebApp;
+   }
+   catch (e){
+   }
    //Функция отображения телеграм кнопки
    function tgMainB_visible(){
       tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
