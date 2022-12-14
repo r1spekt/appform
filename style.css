@@ -5,7 +5,7 @@ body{
     flex-direction: column;
     align-items: center;
     font-size: 18px;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     height:auto;
     overflow:auto;
@@ -15,7 +15,6 @@ td{
 }
 html{
     overflow:auto;
-    height: auto;
 }
 .scrollable {
     position:inherit;
