@@ -10,16 +10,6 @@
 </head>
 
 <body>
-   <!--
-   Выводим наш гет в base64
-   <div id="div-get">
-   </div>
-   Выводим декодированный гет
-   <form>
-      <div id="div-form">
-      </div>
-   </form>
-   -->
    <!--Выводим имя бренда-->
    <form>
       <label for = "div-brand_name">Бренд:</label>
@@ -32,11 +22,6 @@
       <span id="div-order_type_1">
       </span>
    </form>
-   <!--Выводим календарь
-   <form name="calendar">
-      <p>Выберите дату: <input type="date" id="ddmmgggg" name="calendar">
-    </form>
-   -->
    <!--Выводим поля из отчёта тип = 1-->
    <form name="links" method="post">
       <table id="tbl1"  border="1" class="scrollable">
@@ -46,7 +31,7 @@
 
 <script>
    try {
-      let tg = window.Telegram.WebApp;
+      var tg = window.Telegram.WebApp;
    }
    catch (e){
    }
@@ -74,7 +59,6 @@
    data=b64_to_utf8(data_base64); // Декодируем
    data=JSON.parse(data); // Парсим str в JSON
    console.log(data); // Выводим в консоль браузера
-   //console.log(data.brands[0].reports[0].type)
 
    document.getElementById('div-brand_name').innerHTML=data.brands[0].name; //Выводим название бренда
    document.getElementById('div-order_type_1').innerHTML=data.brands[0].reports[0].name; //выводим название отчёта type 1
@@ -98,14 +82,14 @@
    function myFunction() {
       var table= document.getElementById('tbl1');
       console.log(table.rows[0].cells[1].childNodes[0].value);
-      pattern=/^\d+$/;
+      //pattern=/^\d+$/;
       if (this.value.match(pattern) || this.value=="" || this.value==0){
          this.style.color='green';
       }
       else{
          this.style.color="red";
       }
-      if ((table.rows[0].cells[1].childNodes[0].value.match(pattern) && table.rows[0].cells[1].childNodes[0].value>0) && (table.rows[1].cells[1].childNodes[0].value.match(pattern) && table.rows[1].cells[1].childNodes[0].value >0) && (table.rows[2].cells[1].childNodes[0].value.match(pattern) && table.rows[2].cells[1].childNodes[0].value >0)){
+      if (table.rows[0].cells[1].childNodes[0].value>0) && table.rows[1].cells[1].childNodes[0].value >0 && table.rows[2].cells[1].childNodes[0].value >0){
          tgMainB_visible();
       }
       else{
@@ -129,11 +113,7 @@
 
    //Функция отправки данных из формы в бота
    function send_data(){
-      //date=document.getElementById('ddmmgggg').value.split('-');
       data_snd={};
-      //data_snd.day=date[2];
-      //data_snd.month=date[1];
-      //data_snd.year=date[0];
       data_snd.brandName=data.brands[0].name
       data_snd.reportType=data.brands[0].reports[0].type;
       data_snd.indicators=[];
