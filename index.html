@@ -39,7 +39,7 @@
    -->
    <!--Выводим поля из отчёта тип = 1-->
    <form name="links" method="post">
-      <table id="tbl1" style="overflow:scroll">
+      <table id="tbl1" style="overflow:scroll; height: 100%; width: 100%;">
       </table>
    </form>
 </body>
@@ -87,7 +87,7 @@
          if (a.value == '0' || a.value == 0){
             a.value = "";
          }
-         code = code+' <TR><TD><B>'+a.name+' ('+a.measure+')'+':<B></TD><TD><INPUT NAME="'+a.guid+'" ID="'+a.name+'" VALUE="'+a.value+'" type=number SIZE=7 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
+         code = code+' <TR><TD><B>'+a.name+' ('+a.measure+')'+':<B></TD><TD><INPUT NAME="'+a.guid+'" ID="'+a.name+'" VALUE="'+a.value+'" type="number" pattern="[0-9]*" SIZE=7 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
       }
       document.getElementById('tbl1').innerHTML=code
    }
