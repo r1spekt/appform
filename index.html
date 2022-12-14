@@ -82,14 +82,14 @@
    function myFunction() {
       var table= document.getElementById('tbl1');
       console.log(table.rows[0].cells[1].childNodes[0].value);
-      //pattern=/^\d+$/;
+      pattern=/^\d+$/;
       if (this.value.match(pattern) || this.value=="" || this.value==0){
          this.style.color='green';
       }
       else{
          this.style.color="red";
       }
-      if (table.rows[0].cells[1].childNodes[0].value>0) && table.rows[1].cells[1].childNodes[0].value >0 && table.rows[2].cells[1].childNodes[0].value >0){
+      if (table.rows[0].cells[1].childNodes[0].value>0 && table.rows[1].cells[1].childNodes[0].value >0 && table.rows[2].cells[1].childNodes[0].value >0){
          tgMainB_visible();
       }
       else{
