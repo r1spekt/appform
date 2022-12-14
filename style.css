@@ -7,7 +7,7 @@ body{
     font-size: 18px;
     margin: 0 auto;
     padding: 0;
-    height:-webkit-fill-available;
+    height:auto;
     overflow:auto;
 }
 td{
@@ -15,7 +15,7 @@ td{
 }
 html{
     overflow:auto;
-    height: -webkit-fill-available;
+    height: auto;
 }
 .scrollable {
     position:inherit;
