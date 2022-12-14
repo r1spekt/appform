@@ -87,7 +87,7 @@
          if (a.value == '0' || a.value == 0){
             a.value = "";
          }
-         code = code+' <TR><TD><B>'+a.name+' ('+a.measure+')'+':<B></TD><TD><INPUT NAME="'+a.guid+'" ID="'+a.name+'" VALUE="'+a.value+'" SIZE=7 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
+         code = code+' <TR><TD><B>'+a.name+' ('+a.measure+')'+':<B></TD><TD><INPUT NAME="'+a.guid+'" ID="'+a.name+'" VALUE="'+a.value+'" type=number SIZE=7 onBlur="this.value=this.value.toUpperCase()"></TD></TR>'
       }
       document.getElementById('tbl1').innerHTML=code
    }
