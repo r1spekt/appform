@@ -19,4 +19,9 @@ html{
 .scrollable {
     position:inherit;
 }
+@media(min-height:350px){
+#main{
+max-height:300px;
+}
+}
 
