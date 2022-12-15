@@ -9,6 +9,7 @@ body{
     padding: 0;
     height:auto;
     overflow:auto;
+    position:fixed;
 }
 td{
     font-size: 14px;
@@ -19,9 +20,13 @@ html{
 .scrollable {
     position:inherit;
 }
-@media(min-height:350px){
+/*@media(min-height:350px){
 #main{
 max-height:300px;
 }
 }
-
+*/
+#main{
+position: absolute;
+overflow-y:auto;
+}
