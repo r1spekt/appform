@@ -9,7 +9,6 @@ body{
     padding: 0;
     height:auto;
     overflow:auto;
-    position:fixed;
 }
 td{
     font-size: 14px;
